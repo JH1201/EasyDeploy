@@ -48,7 +48,7 @@ CREATE TABLE Users (
     project_tag VARCHAR(255),
     project_download_count INT DEFAULT 0,
     project_storage VARCHAR(255)
-);
+); ```
 
 
 
