@@ -23,7 +23,7 @@
                         <a class="nav-link" href="#projects">프로젝트</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#upload">업로드</a>
+                        <a class="nav-link" href="#statistics">플랫폼 통계</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login">로그인</a>
@@ -55,69 +55,128 @@
             </div>
         </section>
 
-        <!-- 프로젝트 업로드 섹션 -->
-        <section id="upload" class="mb-5">
-            <h2 class="mb-4">프로젝트 업로드</h2>
-            <div class="alert alert-info" role="alert">
-                <i class="bi bi-info-circle"></i> 
-                프로젝트 폴더가 100MB 이상인 경우 ZIP 파일로 압축하여 업로드해 주세요.
+        <!-- 인기 프로젝트 섹션 -->
+        <section id="popularProjects" class="mb-5">
+            <h2 class="mb-4">인기 프로젝트</h2>
+            <div class="row">
+                <!-- 인기 프로젝트 카드 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Spring Boot 쇼핑몰</h5>
+                            <p class="card-text">완성된 쇼핑몰 템플릿으로, 손쉽게 커스터마이징이 가능합니다.</p>
+                            <div class="mb-2">
+                                <span class="badge bg-primary">Spring</span>
+                                <span class="badge bg-success">인증된 프로젝트</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="bi bi-download"></i> 다운로드 1,234회
+                                </small>
+                                <small class="text-muted ms-2">
+                                    <i class="bi bi-star-fill text-warning"></i> 평점 4.8/5.0
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">개발자: 김개발</small>
+                                <a href="#" class="btn btn-sm btn-primary">자세히 보기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 인기 프로젝트 카드 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">실시간 채팅 서비스</h5>
+                            <p class="card-text">WebSocket 기반의 실시간 채팅 구현 템플릿입니다.</p>
+                            <div class="mb-2">
+                                <span class="badge bg-primary">Spring</span>
+                                <span class="badge bg-info">WebSocket</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="bi bi-download"></i> 다운로드 987회
+                                </small>
+                                <small class="text-muted ms-2">
+                                    <i class="bi bi-star-fill text-warning"></i> 평점 4.6/5.0
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">개발자: 이채팅</small>
+                                <a href="#" class="btn btn-sm btn-primary">자세히 보기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 인기 프로젝트 카드 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">JWT 인증 시스템</h5>
+                            <p class="card-text">Spring Security와 JWT를 활용한 인증 시스템입니다.</p>
+                            <div class="mb-2">
+                                <span class="badge bg-primary">Spring</span>
+                                <span class="badge bg-danger">Security</span>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="bi bi-download"></i> 다운로드 856회
+                                </small>
+                                <small class="text-muted ms-2">
+                                    <i class="bi bi-star-fill text-warning"></i> 평점 4.7/5.0
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">개발자: 박보안</small>
+                                <a href="#" class="btn btn-sm btn-primary">자세히 보기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form id="uploadForm">
-                <div class="mb-3">
-                    <label for="projectTitle" class="form-label">프로젝트 제목</label>
-                    <input type="text" class="form-control" id="projectTitle" required>
-                </div>
-                <div class="mb-3">
-                    <label for="projectDescription" class="form-label">프로젝트 설명</label>
-                    <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
-                </div>
-                
-                <!-- 업로드 타입 선택 -->
-                <div class="mb-3">
-                    <label class="form-label">업로드 방식 선택</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="uploadType" id="folderUpload" value="folder" checked>
-                        <label class="form-check-label" for="folderUpload">
-                            폴더 업로드 (100MB 미만)
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="uploadType" id="zipUpload" value="zip">
-                        <label class="form-check-label" for="zipUpload">
-                            ZIP 파일 업로드 (100MB 이상)
-                        </label>
+        </section>
+
+        <!-- 프로젝트 통계 섹션 -->
+        <section id="statistics" class="mb-5">
+            <h2 class="mb-4">플랫폼 통계</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="bi bi-file-earmark-code display-4 text-primary"></i>
+                            <h3 class="card-title mt-3">1,234</h3>
+                            <p class="card-text text-muted">등록된 프로젝트</p>
+                        </div>
                     </div>
                 </div>
-
-                <!-- 폴더 업로드 영역 -->
-                <div id="folderUploadSection" class="mb-3">
-                    <label for="projectFolder" class="form-label">프로젝트 폴더</label>
-                    <input type="file" 
-                           class="form-control" 
-                           id="projectFolder" 
-                           webkitdirectory 
-                           directory 
-                           multiple>
-                    <div class="form-text">전체 프로젝트 폴더를 선택해주세요.</div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="bi bi-people display-4 text-success"></i>
+                            <h3 class="card-title mt-3">5,678</h3>
+                            <p class="card-text text-muted">활성 개발자</p>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- ZIP 파일 업로드 영역 -->
-                <div id="zipUploadSection" class="mb-3" style="display: none;">
-                    <label for="projectZip" class="form-label">압축된 프로젝트 파일 (ZIP)</label>
-                    <input type="file" 
-                           class="form-control" 
-                           id="projectZip" 
-                           accept=".zip">
-                    <div class="form-text">ZIP 형식의 압축 파일만 업로드 가능합니다.</div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="bi bi-download display-4 text-info"></i>
+                            <h3 class="card-title mt-3">98,765</h3>
+                            <p class="card-text text-muted">총 다운로드</p>
+                        </div>
+                    </div>
                 </div>
-
-                <div id="fileList" class="mb-3 border p-3 rounded" style="max-height: 200px; overflow-y: auto; display: none;">
-                    <h6>선택된 파일 목록:</h6>
-                    <ul class="list-unstyled" id="selectedFiles"></ul>
-                </div>
-
-                <button type="submit" class="btn btn-primary">업로드</button>
-            </form>
+            </div>
         </section>
     </main>
 
@@ -131,78 +190,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- 파일 처리를 위한 JavaScript -->
-    <script>
-    // 업로드 타입 전환 처리
-    document.querySelectorAll('input[name="uploadType"]').forEach(radio => {
-        radio.addEventListener('change', function() {
-            const folderSection = document.getElementById('folderUploadSection');
-            const zipSection = document.getElementById('zipUploadSection');
-            const fileList = document.getElementById('fileList');
-            
-            if (this.value === 'folder') {
-                folderSection.style.display = 'block';
-                zipSection.style.display = 'none';
-            } else {
-                folderSection.style.display = 'none';
-                zipSection.style.display = 'block';
-            }
-            fileList.style.display = 'none';
-            document.getElementById('selectedFiles').innerHTML = '';
-        });
-    });
-
-    // 폴더 업로드 처리
-    document.getElementById('projectFolder').addEventListener('change', function(e) {
-        const fileList = document.getElementById('fileList');
-        const selectedFiles = document.getElementById('selectedFiles');
-        selectedFiles.innerHTML = '';
-        
-        if (this.files.length > 0) {
-            let totalSize = 0;
-            fileList.style.display = 'block';
-            
-            Array.from(this.files).forEach(file => {
-                totalSize += file.size;
-                const li = document.createElement('li');
-                li.textContent = `${file.webkitRelativePath || file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
-                selectedFiles.appendChild(li);
-            });
-
-            // 100MB = 100 * 1024 * 1024 bytes
-            if (totalSize > 100 * 1024 * 1024) {
-                alert('폴더 크기가 100MB를 초과합니다. ZIP 파일로 압축하여 업로드해 주세요.');
-                this.value = '';
-                fileList.style.display = 'none';
-                document.getElementById('zipUpload').checked = true;
-                document.getElementById('folderUploadSection').style.display = 'none';
-                document.getElementById('zipUploadSection').style.display = 'block';
-            }
-        } else {
-            fileList.style.display = 'none';
-        }
-    });
-
-    // ZIP 파일 업로드 처리
-    document.getElementById('projectZip').addEventListener('change', function(e) {
-        const file = this.files[0];
-        if (file) {
-            if (!file.name.toLowerCase().endsWith('.zip')) {
-                alert('ZIP 형식의 파일만 업로드 가능합니다.');
-                this.value = '';
-                return;
-            }
-            
-            const fileList = document.getElementById('fileList');
-            const selectedFiles = document.getElementById('selectedFiles');
-            selectedFiles.innerHTML = '';
-            fileList.style.display = 'block';
-            
-            const li = document.createElement('li');
-            li.textContent = `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
-            selectedFiles.appendChild(li);
-        }
-    });
-    </script>
+    
 </body>
 </html>
