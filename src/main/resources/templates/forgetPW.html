@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 찾기 - 프로젝트 배포 플랫폼</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Easy Deploy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#projects">프로젝트</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#upload">업로드</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">로그인</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 비밀번호 찾기 폼 -->
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4">비밀번호 찾기</h2>
+                        <div class="alert alert-info" role="alert">
+                            가입 시 등록한 이메일로 인증 링크가 발송됩니다.
+                        </div>
+                        
+                        <!-- 이메일 입력 단계 -->
+                        <div id="emailStep">
+                            <form id="emailForm" action="/password/reset" method="POST">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">이메일 주소</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">인증 메일 받기</button>
+                                    <a href="/login" class="btn btn-outline-secondary">로그인으로 돌아가기</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 인증 코드 입력 단계 (기본적으로 숨김) -->
+                        <div id="verificationStep" style="display: none;">
+                            <form id="verificationForm" action="/password/verify" method="POST">
+                                <div class="mb-3">
+                                    <label for="verificationCode" class="form-label">인증 코드</label>
+                                    <input type="text" class="form-control" id="verificationCode" name="verificationCode" required>
+                                    <div class="form-text">이메일로 받은 6자리 인증 코드를 입력해주세요.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">새 비밀번호</label>
+                                    <input type="password" class="form-control" id="newPassword" name="newPassword" 
+                                           pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required>
+                                    <div class="form-text">8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">새 비밀번호 확인</label>
+                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                    <div id="passwordMatch" class="form-text text-danger" style="display: none;">
+                                        비밀번호가 일치하지 않습니다.
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">비밀번호 변경</button>
+                                    <button type="button" class="btn btn-outline-secondary" onclick="resendCode()">인증코드 재발송</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 프로젝트 배포 플랫폼. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 유효성 검사 및 단계 전환 스크립트 -->
+    <script>
+        // 이메일 폼 제출 처리
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // 여기에 이메일 전송 API 호출 로직 추가
+            document.getElementById('emailStep').style.display = 'none';
+            document.getElementById('verificationStep').style.display = 'block';
+        });
+
+        // 인증 코드 재발송
+        function resendCode() {
+            // 여기에 인증 코드 재발송 로직 추가
+            alert('인증 코드가 재발송되었습니다.');
+        }
+
+        // 비밀번호 일치 확인
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const newPassword = document.getElementById('newPassword').value;
+            const passwordMatch = document.getElementById('passwordMatch');
+            
+            if (this.value && this.value !== newPassword) {
+                passwordMatch.style.display = 'block';
+            } else {
+                passwordMatch.style.display = 'none';
+            }
+        });
+
+        // 비밀번호 변경 폼 제출
+        document.getElementById('verificationForm').addEventListener('submit', function(e) {
+            const newPassword = document.getElementById('newPassword');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const passwordMatch = document.getElementById('passwordMatch');
+
+            if (newPassword.value !== confirmPassword.value) {
+                e.preventDefault();
+                passwordMatch.style.display = 'block';
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -13,7 +13,7 @@
     <!-- 네비게이션 바 -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">프로젝트 배포 플랫폼</a>
+            <a class="navbar-brand" href="/">Easy Deploy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -58,7 +58,11 @@
         <!-- 프로젝트 업로드 섹션 -->
         <section id="upload" class="mb-5">
             <h2 class="mb-4">프로젝트 업로드</h2>
-            <form>
+            <div class="alert alert-info" role="alert">
+                <i class="bi bi-info-circle"></i> 
+                프로젝트 폴더가 100MB 이상인 경우 ZIP 파일로 압축하여 업로드해 주세요.
+            </div>
+            <form id="uploadForm">
                 <div class="mb-3">
                     <label for="projectTitle" class="form-label">프로젝트 제목</label>
                     <input type="text" class="form-control" id="projectTitle" required>
@@ -67,10 +71,51 @@
                     <label for="projectDescription" class="form-label">프로젝트 설명</label>
                     <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
                 </div>
+                
+                <!-- 업로드 타입 선택 -->
                 <div class="mb-3">
-                    <label for="projectFile" class="form-label">프로젝트 파일</label>
-                    <input type="file" class="form-control" id="projectFile" required>
+                    <label class="form-label">업로드 방식 선택</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="uploadType" id="folderUpload" value="folder" checked>
+                        <label class="form-check-label" for="folderUpload">
+                            폴더 업로드 (100MB 미만)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="uploadType" id="zipUpload" value="zip">
+                        <label class="form-check-label" for="zipUpload">
+                            ZIP 파일 업로드 (100MB 이상)
+                        </label>
+                    </div>
                 </div>
+
+                <!-- 폴더 업로드 영역 -->
+                <div id="folderUploadSection" class="mb-3">
+                    <label for="projectFolder" class="form-label">프로젝트 폴더</label>
+                    <input type="file" 
+                           class="form-control" 
+                           id="projectFolder" 
+                           webkitdirectory 
+                           directory 
+                           multiple>
+                    <div class="form-text">전체 프로젝트 폴더를 선택해주세요.</div>
+                </div>
+
+                <!-- ZIP 파일 업로드 영역 -->
+                <div id="zipUploadSection" class="mb-3" style="display: none;">
+                    <label for="projectZip" class="form-label">압축된 프로젝트 파일 (ZIP)</label>
+                    <input type="file" 
+                           class="form-control" 
+                           id="projectZip" 
+                           accept=".zip">
+                    <div class="form-text">ZIP 형식의 압축 파일만 업로드 가능합니다.</div>
+                </div>
+
+                <div id="fileList" class="mb-3 border p-3 rounded" style="max-height: 200px; overflow-y: auto; display: none;">
+                    <h6>선택된 파일 목록:</h6>
+                    <ul class="list-unstyled" id="selectedFiles"></ul>
+                </div>
+
                 <button type="submit" class="btn btn-primary">업로드</button>
             </form>
         </section>
@@ -85,5 +130,79 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 파일 처리를 위한 JavaScript -->
+    <script>
+    // 업로드 타입 전환 처리
+    document.querySelectorAll('input[name="uploadType"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const folderSection = document.getElementById('folderUploadSection');
+            const zipSection = document.getElementById('zipUploadSection');
+            const fileList = document.getElementById('fileList');
+            
+            if (this.value === 'folder') {
+                folderSection.style.display = 'block';
+                zipSection.style.display = 'none';
+            } else {
+                folderSection.style.display = 'none';
+                zipSection.style.display = 'block';
+            }
+            fileList.style.display = 'none';
+            document.getElementById('selectedFiles').innerHTML = '';
+        });
+    });
+
+    // 폴더 업로드 처리
+    document.getElementById('projectFolder').addEventListener('change', function(e) {
+        const fileList = document.getElementById('fileList');
+        const selectedFiles = document.getElementById('selectedFiles');
+        selectedFiles.innerHTML = '';
+        
+        if (this.files.length > 0) {
+            let totalSize = 0;
+            fileList.style.display = 'block';
+            
+            Array.from(this.files).forEach(file => {
+                totalSize += file.size;
+                const li = document.createElement('li');
+                li.textContent = `${file.webkitRelativePath || file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                selectedFiles.appendChild(li);
+            });
+
+            // 100MB = 100 * 1024 * 1024 bytes
+            if (totalSize > 100 * 1024 * 1024) {
+                alert('폴더 크기가 100MB를 초과합니다. ZIP 파일로 압축하여 업로드해 주세요.');
+                this.value = '';
+                fileList.style.display = 'none';
+                document.getElementById('zipUpload').checked = true;
+                document.getElementById('folderUploadSection').style.display = 'none';
+                document.getElementById('zipUploadSection').style.display = 'block';
+            }
+        } else {
+            fileList.style.display = 'none';
+        }
+    });
+
+    // ZIP 파일 업로드 처리
+    document.getElementById('projectZip').addEventListener('change', function(e) {
+        const file = this.files[0];
+        if (file) {
+            if (!file.name.toLowerCase().endsWith('.zip')) {
+                alert('ZIP 형식의 파일만 업로드 가능합니다.');
+                this.value = '';
+                return;
+            }
+            
+            const fileList = document.getElementById('fileList');
+            const selectedFiles = document.getElementById('selectedFiles');
+            selectedFiles.innerHTML = '';
+            fileList.style.display = 'block';
+            
+            const li = document.createElement('li');
+            li.textContent = `${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            selectedFiles.appendChild(li);
+        }
+    });
+    </script>
 </body>
 </html>

@@ -15,4 +15,19 @@ public class indexController {
     public String loginPage() {
         return "login";
     }
+
+    @GetMapping("/register")
+    public String registerPage() {
+        return "regis";
+    }
+
+    @GetMapping("/forgot-password")
+    public String forgetPWPage() {
+        return "forgetPW";
+    }
+
+    @GetMapping("/afterLog")
+    public String afterLogPage() {
+        return "afterLog";
+    }
 }

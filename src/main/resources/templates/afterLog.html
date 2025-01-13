@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이 페이지 - 프로젝트 배포 플랫폼</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/afterLog">Easy Deploy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#myProjects">내 프로젝트</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#upload">업로드</a>
+                    </li>
+                </ul>
+                <!-- 사용자 프로필 드롭다운 -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="profileDropdown" 
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i> <span id="userName">사용자명</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#profile"><i class="bi bi-gear"></i> 프로필 설정</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/"><i class="bi bi-box-arrow-right"></i> 로그아웃</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 섹션 -->
+    <main class="container my-5">
+        <!-- 대시보드 요약 -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">총 프로젝트</h5>
+                        <p class="card-text display-6">12</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">총 다운로드</h5>
+                        <p class="card-text display-6">1,234</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">저장 용량</h5>
+                        <p class="card-text display-6">2.1GB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 내 프로젝트 섹션 -->
+        <section id="myProjects" class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>내 프로젝트</h2>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                    <i class="bi bi-plus-lg"></i> 새 프로젝트
+                </button>
+            </div>
+            <div class="row">
+                <!-- 프로젝트 카드 예시 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">프로젝트 제목</h5>
+                            <p class="card-text">프로젝트 설명이 들어갈 자리입니다.</p>
+                            <div class="mb-2">
+                                <span class="badge bg-primary">Spring</span>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">최근 업데이트: 2024-03-21</small>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-primary">수정</button>
+                                    <button class="btn btn-sm btn-outline-danger">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 활동 로그 섹션 -->
+        <section id="activityLog" class="mb-5">
+            <h2 class="mb-4">최근 활동</h2>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">프로젝트 업데이트</h6>
+                        <small class="text-muted">3일 전</small>
+                    </div>
+                    <p class="mb-1">프로젝트 A의 새 버전이 배포되었습니다.</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">새 다운로드</h6>
+                        <small class="text-muted">5일 전</small>
+                    </div>
+                    <p class="mb-1">프로젝트 B가 10회 다운로드되었습니다.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 프로젝트 업로드 모달 -->
+    <div class="modal fade" id="uploadModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">새 프로젝트 업로드</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="uploadForm">
+                        <div class="mb-3">
+                            <label for="projectTitle" class="form-label">프로젝트 제목</label>
+                            <input type="text" class="form-control" id="projectTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="projectDescription" class="form-label">프로젝트 설명</label>
+                            <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="projectTags" class="form-label">태그</label>
+                            <input type="text" class="form-control" id="projectTags" 
+                                   placeholder="쉼표로 구분하여 입력 (예: Spring, Web, API)">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">업로드 방식</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="uploadType" id="folderUpload" checked>
+                                <label class="form-check-label" for="folderUpload">폴더 업로드</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="uploadType" id="zipUpload">
+                                <label class="form-check-label" for="zipUpload">ZIP 파일 업로드</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="projectFiles" class="form-label">프로젝트 파일</label>
+                            <input type="file" class="form-control" id="projectFiles" webkitdirectory directory multiple>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary">업로드</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 프로젝트 배포 플랫폼. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
