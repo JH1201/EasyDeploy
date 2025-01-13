@@ -30,4 +30,14 @@ public class indexController {
     public String afterLogPage() {
         return "afterLog";
     }
+
+    @GetMapping("/guide")
+    public String guidePage() {
+        return "guide";
+    }
+
+    @GetMapping("/popular")
+    public String popularPage() {
+        return "popular";
+    }
 }

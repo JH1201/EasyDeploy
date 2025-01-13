@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배포 가이드 - 프로젝트 배포 플랫폼</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/afterLog">Easy Deploy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    
+                </ul>
+                <!-- 사용자 프로필 드롭다운 -->
+                <div class="dropdown">
+                    <!--<button class="btn btn-outline-light dropdown-toggle" type="button" id="profileDropdown" 
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i> <span id="userName">사용자명</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#profile"><i class="bi bi-gear"></i> 프로필 설정</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/"><i class="bi bi-box-arrow-right"></i> 로그아웃</a></li>
+                    </ul>-->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="container my-5">
+        <div class="row">
+            <!-- 왼쪽 사이드바 (목차) -->
+            <div class="col-lg-3">
+                <div class="sticky-top" style="top: 2rem;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">목차</h5>
+                            <nav class="nav flex-column">
+                                <a class="nav-link" href="#preparation">1. 준비사항</a>
+                                <a class="nav-link" href="#project-structure">2. 프로젝트 구조</a>
+                                <a class="nav-link" href="#deployment-process">3. 배포 프로세스</a>
+                                <a class="nav-link" href="#troubleshooting">4. 문제 해결</a>
+                                <a class="nav-link" href="#faq">5. 자주 묻는 질문</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 메인 컨텐츠 영역 -->
+            <div class="col-lg-9">
+                <!-- 준비사항 섹션 -->
+                <section id="preparation" class="mb-5">
+                    <h2 class="border-bottom pb-2">1. 준비사항</h2>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">필수 요구사항</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success"></i> Java 11 이상
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success"></i> Maven 또는 Gradle
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success"></i> Git
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 프로젝트 구조 섹션 -->
+                <section id="project-structure" class="mb-5">
+                    <h2 class="border-bottom pb-2">2. 프로젝트 구조</h2>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">권장 프로젝트 구조</h5>
+                            <pre class="bg-light p-3 rounded">
+project-root/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   ├── resources/
+│   │   └── webapp/
+│   └── test/
+├── pom.xml 또는 build.gradle
+└── README.md</pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 배포 프로세스 섹션 -->
+                <section id="deployment-process" class="mb-5">
+                    <h2 class="border-bottom pb-2">3. 배포 프로세스</h2>
+                    <div class="alert alert-info" role="alert">
+                        <i class="bi bi-info-circle-fill"></i> 배포 전 모든 테스트가 통과되었는지 확인하세요.
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">배포 단계</h5>
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item">프로젝트 빌드</li>
+                                <li class="list-group-item">테스트 실행</li>
+                                <li class="list-group-item">배포 파일 생성</li>
+                                <li class="list-group-item">서버 업로드</li>
+                                <li class="list-group-item">서비스 시작</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 문제 해결 섹션 -->
+                <section id="troubleshooting" class="mb-5">
+                    <h2 class="border-bottom pb-2">4. 문제 해결</h2>
+                    <div class="accordion" id="troubleshootingAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    빌드 실패 시 해결 방법
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#troubleshootingAccordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>의존성 충돌 확인</li>
+                                        <li>Java 버전 확인</li>
+                                        <li>빌드 로그 확인</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ 섹션 -->
+                <section id="faq" class="mb-5">
+                    <h2 class="border-bottom pb-2">5. 자주 묻는 질문</h2>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
+                                    배포 후 서비스가 실행되지 않을 때는 어떻게 하나요?
+                                </button>
+                            </h2>
+                            <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>다음 사항들을 확인해보세요:</p>
+                                    <ul>
+                                        <li>포트 충돌 여부</li>
+                                        <li>환경 변수 설정</li>
+                                        <li>로그 파일 확인</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 프로젝트 배포 플랫폼. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
