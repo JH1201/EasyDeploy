@@ -42,17 +42,13 @@
                         <h2 class="text-center mb-4">회원가입</h2>
                         <form action="/register" method="POST" id="registerForm">
                             <div class="mb-3">
-                                <label for="username" class="form-label">아이디</label>
-                                <input type="text" class="form-control" id="username" name="username" required
-                                       pattern="^[a-zA-Z0-9]{4,20}$">
+                                <label for="userid" class="form-label">아이디</label>
+                                <input type="text" class="form-control" id="userid" name="userid" required
+                                       pattern="^[a-zA-Z0-9]{4,20}$" th:value="${userid}">
                                 <div class="form-text">4~20자의 영문 대소문자와 숫자만 사용 가능합니다.</div>
+                                <div class="text-danger" th:if="${useridError}" th:text="${useridError}"></div>
                             </div>
-                            
-                            <div class="mb-3">
-                                <label for="email" class="form-label">이메일</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-
+                     
                             <div class="mb-3">
                                 <label for="password" class="form-label">비밀번호</label>
                                 <input type="password" class="form-control" id="password" name="password" required
@@ -69,8 +65,15 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="name" class="form-label">이름</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <label for="useremail" class="form-label">이메일</label>
+                                <input type="email" class="form-control" id="useremail" name="useremail" required
+                                       th:value="${useremail}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="username" class="form-label">이름</label>
+                                <input type="text" class="form-control" id="username" name="username" required 
+                                       th:value="${username}">
                             </div>
 
                             <div class="mb-3 form-check">

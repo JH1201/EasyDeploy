@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jioon.deploy_project.mapper.UserLoginMapper">
+
+    <select id="userLogin" parameterType="String" resultType="com.jioon.deploy_project.DTO.userDTO">
+        SELECT * FROM ezdeploy.user_table WHERE userid = #{userid} AND password = #{password}
+    </select>
+
+    <insert id="userRegister" parameterType="com.jioon.deploy_project.DTO.userDTO">
+        INSERT INTO ezdeploy.user_table (userid, password, useremail, username) VALUES (#{userid}, #{password}, #{useremail}, #{username})
+    </insert>
+   
+
+    <select id="isUserIdExists" parameterType="String" resultType="boolean">
+        SELECT COUNT(*) FROM ezdeploy.user_table WHERE userid = #{userid}
+    </select>
+
+</mapper>
+
