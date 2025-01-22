@@ -19,7 +19,7 @@
 - 로그인 및 로그아웃 기능 개발 완료
   
 
-### 📁 **5. [Easy Deploy] 파일더 업로드 구현**
+### 📁 **5. [Easy Deploy] 파일 업로드 구현**
 - 사용자가 프로젝트 폴더 내 dockerfile과 docker compose 파일을 업로드 가능하도록 구현  
 - 업로드된 프로젝트는 `Users` 테이블에 등록된 파일 컬럼과 연동
 
@@ -38,34 +38,50 @@
 
 ---
 
-### Users 테이블 구조 (user와 project 분리)
+### Users 테이블 구조
   
 | **컬럼명**            | **데이터 타입** | **설명**               |
 |-----------------------|----------------|------------------------|
-| `user_name`           | VARCHAR        | 사용자 이름            |
-| `user_id`             | VARCHAR        | 사용자 ID (고유값)     |
-| `user_pw`             | VARCHAR        | 사용자 비밀번호        |
-| `user_dockerfile`     | FILE           | Dockerfile 업로드      |
-| `user_docker_compose` | FILE           | Docker Compose 파일    |
-| `project_name`        | VARCHAR        | 프로젝트 이름          |
-| `project_description` | TEXT           | 프로젝트 설명          |
-| `project_upload_date` | DATETIME       | 프로젝트 업로드 날짜   |
-| `project_tag`         | VARCHAR        | 프로젝트 태그          |
-| `project_download_count` | INT        | 프로젝트 다운로드 수   |
-| `project_storage`     | VARCHAR        | 프로젝트 저장 경로     |
+| `username`            | VARCHAR        | 사용자 이름             |
+| `userid`              | VARCHAR        | 사용자 ID (고유값)      |
+| `passwored`           | VARCHAR        | 사용자 비밀번호         |
+| `useremail`           | VARCHAR        | 사용자 이메일           |
 
 ### **테이블 예시**
 ```sql
 CREATE TABLE Users (
-    user_name VARCHAR(50) NOT NULL,
-    user_id VARCHAR(50) PRIMARY KEY,
-    user_pw VARCHAR(255) NOT NULL,
-    user_dockerfile BLOB,
-    user_docker_compose BLOB,
+    username VARCHAR(50) NOT NULL,
+    userid VARCHAR(50) PRIMARY KEY,
+    passwored VARCHAR(255) NOT NULL,
+    useremail VARCHAR(255) NOT NULL,
+);
+```
+---
+
+### Projects 테이블 구조
+  
+| **컬럼명**            | **데이터 타입** | **설명**               |
+|-----------------------|----------------|------------------------|
+|`project_name`         | VARCHAR        | 프로젝트 제목            |
+| `project_description` | TEXT           | 프로젝트 설명           |
+| `project_upload_date` | DATETIME       | 프로젝트 업로드 날짜    |
+| `project_tag`         | VARCHAR        | 프로젝트 태그           |
+| `project_download_count` | INT         | 프로젝트 다운로드 수     |
+| `project_view_count`     | INT         | 프로젝트 조회수          |
+| `project_dockerfile`     | FILE        | Dockerfile 업로드       |
+| `project_build_file`  | FILE           | jar, war 파일 업로드    |
+
+### **테이블 예시**
+```sql
+CREATE TABLE projects (
+    project_id SERIAL PRIMARY KEY,
     project_name VARCHAR(100) NOT NULL,
     project_description TEXT,
-    project_upload_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    project_upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     project_tag VARCHAR(255),
     project_download_count INT DEFAULT 0,
-    project_storage VARCHAR(255)
+    project_view_count INT DEFAULT 0,
+    project_dockerfile BYTEA, -- 파일 내용 저장
+    project_buildfile BYTEA   -- 파일 내용 저장
 );
+```
