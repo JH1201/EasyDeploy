@@ -12,5 +12,7 @@ public interface UserLoginMapper {
     void userRegister(userDTO user);
 
     boolean isUserIdExists(String userid);
+
+    boolean isUserEmailExists(String useremail);
 }
 

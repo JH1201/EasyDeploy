@@ -68,6 +68,7 @@
                                 <label for="useremail" class="form-label">이메일</label>
                                 <input type="email" class="form-control" id="useremail" name="useremail" required
                                        th:value="${useremail}">
+                                <div class="text-danger" th:if="${useremailError}" th:text="${useremailError}"></div>
                             </div>
 
                             <div class="mb-3">

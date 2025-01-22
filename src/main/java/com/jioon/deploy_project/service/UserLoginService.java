@@ -9,5 +9,7 @@ public interface UserLoginService {
     public void userRegister(userDTO user);
 
     public boolean isUserIdExists(String userid);
+
+    public boolean isUserEmailExists(String useremail);
     
 }

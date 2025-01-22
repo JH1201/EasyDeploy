@@ -16,7 +16,7 @@ public class IndexController {
         
         if (user != null) {
             model.addAttribute("username", user.getUsername());
-            return "afterLog";
+            return "login/afterLog";
         }
 
         return "index";

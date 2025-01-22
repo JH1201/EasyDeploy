@@ -24,7 +24,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "login/login";
     }
 
     @PostMapping("/login")
@@ -45,13 +45,13 @@ public class LoginController {
             return "redirect:/afterLog";
         } else {
             model.addAttribute("error", "아이디 또는 비밀번호가 잘못되었습니다.");
-            return "login";
+            return "login/login";
         }
     }
 
     @GetMapping("/forgot-password")
     public String forgetPWPage() {
-        return "forgetPW";
+        return "login/forgetPW";
     }
 
     @GetMapping("/afterLog")
@@ -59,16 +59,16 @@ public class LoginController {
         userDTO user = (userDTO) session.getAttribute("user");
         
         if (user == null) {
-            return "redirect:/login";  // 세션이 없으면 로그인 페이지로
+            return "redirect:/";  // 세션이 없으면 로그인 페이지로
         }
         
         model.addAttribute("username", user.getUsername());
-        return "afterLog";
+        return "login/afterLog";
     }
 
     @GetMapping("/register")
     public String registerPage() {
-        return "regis";
+        return "login/regis";
     }
 
     @PostMapping("/register")
@@ -85,7 +85,16 @@ public class LoginController {
             model.addAttribute("userid", userid);
             model.addAttribute("useremail", useremail);
             model.addAttribute("username", username);
-            return "regis";
+            return "login/regis";
+        }
+
+        // email 중복 체크
+        if (userService.isUserEmailExists(useremail)) {
+            model.addAttribute("userid", userid);
+            model.addAttribute("useremail", useremail);
+            model.addAttribute("useremailError", "이미 존재하는 이메일입니다.");
+            model.addAttribute("username", username);
+            return "login/regis";
         }
 
         user.setUserid(userid);
@@ -95,7 +104,7 @@ public class LoginController {
 
         userService.userRegister(user);
         
-        return "login";
+        return "login/login";
     }
 
     @GetMapping("/logout")

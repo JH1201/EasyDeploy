@@ -16,5 +16,9 @@
         SELECT COUNT(*) FROM ezdeploy.user_table WHERE userid = #{userid}
     </select>
 
+    <select id="isUserEmailExists" parameterType="String" resultType="boolean">
+        SELECT COUNT(*) FROM ezdeploy.user_table WHERE useremail = #{useremail}
+    </select>
+
 </mapper>
 

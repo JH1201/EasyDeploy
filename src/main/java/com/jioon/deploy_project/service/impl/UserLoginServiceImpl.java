@@ -27,4 +27,9 @@ public class UserLoginServiceImpl implements UserLoginService {
     public boolean isUserIdExists(String userid) {
         return userMapper.isUserIdExists(userid);
     }
+
+    @Override
+    public boolean isUserEmailExists(String usreemail) {
+        return userMapper.isUserEmailExists(usreemail);
+    }
 }
