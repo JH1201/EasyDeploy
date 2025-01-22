@@ -55,3 +55,32 @@ CREATE TABLE Users (
     passwored VARCHAR(255) NOT NULL,
     useremail VARCHAR(255) NOT NULL,
 );
+
+---
+
+### Projects 테이블 구조
+  
+| **컬럼명**            | **데이터 타입** | **설명**               |
+|-----------------------|----------------|------------------------|
+|`project_name`         | VARCHAR        | 프로젝트 제목            |
+| `project_description` | TEXT           | 프로젝트 설명           |
+| `project_upload_date` | DATETIME       | 프로젝트 업로드 날짜    |
+| `project_tag`         | VARCHAR        | 프로젝트 태그           |
+| `project_download_count` | INT         | 프로젝트 다운로드 수     |
+| `project_view_count`     | INT         | 프로젝트 조회수          |
+| `project_dockerfile`     | FILE        | Dockerfile 업로드       |
+| `project_build_file`  | FILE           | jar, war 파일 업로드    |
+
+### **테이블 예시**
+```sql
+CREATE TABLE projects (
+    project_id SERIAL PRIMARY KEY,
+    project_name VARCHAR(100) NOT NULL,
+    project_description TEXT,
+    project_upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    project_tag VARCHAR(255),
+    project_download_count INT DEFAULT 0,
+    project_view_count INT DEFAULT 0,
+    project_dockerfile BYTEA, -- 파일 내용 저장
+    project_buildfile BYTEA   -- 파일 내용 저장
+);
