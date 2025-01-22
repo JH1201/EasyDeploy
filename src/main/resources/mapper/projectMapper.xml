@@ -23,4 +23,8 @@
             #{projectBuildfile})
     </insert>
 
+    <select id="getProjectList" parameterType="String" resultType="com.jioon.deploy_project.DTO.projectDTO">
+        SELECT * FROM ezdeploy.projects WHERE userid = #{userId}
+    </select>
+
 </mapper>
