@@ -26,8 +26,6 @@ public class projectController {
 
         // 세션에서 데이터 가져오기
         String userId = (String) session.getAttribute("userid");
-
-        System.out.println("userId : " + userId);
         
         projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile);
     

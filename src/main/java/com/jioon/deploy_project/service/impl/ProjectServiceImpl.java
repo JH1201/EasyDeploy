@@ -40,7 +40,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     public List<projectDTO> getProjectList(String userId) {
         List<projectDTO> projects = projectMapper.getProjectList(userId);
-        System.out.println("ProjectServiceImpl - 반환된 프로젝트 목록: " + projects);
         return projects;
     }
 }
