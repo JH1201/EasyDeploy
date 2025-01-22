@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jioon.deploy_project.DTO.userDTO;
+import com.jioon.deploy_project.service.impl.ProjectServiceImpl;
 import com.jioon.deploy_project.service.impl.UserLoginServiceImpl;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class LoginController {
 
     @Autowired
     private UserLoginServiceImpl userService;
+
+    @Autowired
+    private ProjectServiceImpl projectService;
     
 
     @GetMapping("/login")
@@ -64,6 +69,9 @@ public class LoginController {
         }
         
         model.addAttribute("username", user.getUsername());
+        model.addAttribute("projects", projectService.getProjectList(user.getUserid()));
+        
+         
         return "login/afterLog";
     }
 

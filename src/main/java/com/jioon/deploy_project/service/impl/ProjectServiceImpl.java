@@ -1,5 +1,7 @@
 package com.jioon.deploy_project.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +36,12 @@ public class ProjectServiceImpl implements ProjectService {
         project.setUserId(userId);
 
         projectMapper.insertProject(project);
+    }
+
+    public List<projectDTO> getProjectList(String userId) {
+        List<projectDTO> projects = projectMapper.getProjectList(userId);
+        System.out.println("ProjectServiceImpl - 반환된 프로젝트 목록: " + projects);
+        return projects;
     }
 }
 

@@ -6,12 +6,12 @@
     <insert id="insertProject" parameterType="com.jioon.deploy_project.DTO.projectDTO">
         INSERT INTO ezdeploy.projects (
             userid,
-            project_name, 
-            project_description, 
-            project_tag, 
-            project_version,
-            project_dockerfile, 
-            project_buildfile
+            projectname, 
+            projectdescription, 
+            projecttag, 
+            projectversion,
+            dockerfile, 
+            buildfile
             ) 
         VALUES (
             #{userId}, 

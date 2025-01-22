@@ -29,9 +29,9 @@ public class projectController {
 
         System.out.println("userId : " + userId);
         
-        projectService.uploadProject(userId,projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile);
+        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile);
     
-        return "redirect:/";
+        return "redirect:/afterLog";
     }
 }
 
