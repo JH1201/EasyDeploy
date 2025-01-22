@@ -41,7 +41,8 @@ public class LoginController {
             session.setAttribute("username", user.getUsername());
             
             System.out.println("로그인 성공: " + user.getUsername() + " (세션 ID: " + session.getId() + ")");
-            
+            System.out.println("userId : " + session.getAttribute("userid"));
+
             return "redirect:/afterLog";
         } else {
             model.addAttribute("error", "아이디 또는 비밀번호가 잘못되었습니다.");

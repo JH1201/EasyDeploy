@@ -300,40 +300,44 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="uploadForm">
+                    <form id="uploadProject" method="post" action="/uploadProject" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="projectTitle" class="form-label">프로젝트 제목</label>
-                            <input type="text" class="form-control" id="projectTitle" required>
+                            <label for="projectName" class="form-label">프로젝트 이름</label>
+                            <input type="text" class="form-control" id="projectName" name="projectName" required>
                         </div>
                         <div class="mb-3">
                             <label for="projectDescription" class="form-label">프로젝트 설명</label>
-                            <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
+                            <textarea class="form-control" id="projectDescription" name="projectDescription" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="projectTags" class="form-label">태그</label>
-                            <input type="text" class="form-control" id="projectTags" 
+                            <label for="projectTag" class="form-label">태그</label>
+                            <input type="text" class="form-control" id="projectTag" name="projectTag" 
                                    placeholder="쉼표로 구분하여 입력 (예: Spring, Web, API)">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">업로드 방식</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="uploadType" id="folderUpload" checked>
-                                <label class="form-check-label" for="folderUpload">폴더 업로드</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="uploadType" id="zipUpload">
-                                <label class="form-check-label" for="zipUpload">ZIP 파일 업로드</label>
-                            </div>
+                            <label for="projectVersion" class="form-label">버전</label>
+                            <input type="text" class="form-control" id="projectVersion" name="projectVersion" 
+                                   placeholder="예: 1.0.0" required>
                         </div>
                         <div class="mb-3">
-                            <label for="projectFiles" class="form-label">프로젝트 파일</label>
-                            <input type="file" class="form-control" id="projectFiles" webkitdirectory directory multiple>
+                            <label class="form-label">프로젝트 파일</label>
+                            <div class="mb-2">
+                                <label for="dockerfile" class="form-label">Dockerfile</label>
+                                <input type="file" class="form-control" id="dockerfile" name="dockerfile" 
+                                       accept=".dockerfile,Dockerfile" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="buildFile" class="form-label">빌드 파일 (jar/war)</label>
+                                <input type="file" class="form-control" id="buildFile" name="buildFile" 
+                                       accept=".jar,.war" required>
+                            </div>
                         </div>
+                        <input type="hidden" id="userId" name="userId" th:value="${username}">
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary">업로드</button>
+                    <button type="submit" form="uploadProject" class="btn btn-primary">업로드</button>
                 </div>
             </div>
         </div>

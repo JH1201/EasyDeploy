@@ -20,5 +20,9 @@
         SELECT COUNT(*) FROM ezdeploy.user_table WHERE useremail = #{useremail}
     </select>
 
+    <select id="getUserInfo" parameterType="String" resultType="com.jioon.deploy_project.DTO.userDTO">
+        SELECT * FROM ezdeploy.user_table WHERE userid = #{userid}
+    </select>
+
 </mapper>
 
