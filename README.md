@@ -55,7 +55,7 @@ CREATE TABLE Users (
     passwored VARCHAR(255) NOT NULL,
     useremail VARCHAR(255) NOT NULL,
 );
-
+```
 ---
 
 ### Projects 테이블 구조
@@ -84,3 +84,4 @@ CREATE TABLE projects (
     project_dockerfile BYTEA, -- 파일 내용 저장
     project_buildfile BYTEA   -- 파일 내용 저장
 );
+```
