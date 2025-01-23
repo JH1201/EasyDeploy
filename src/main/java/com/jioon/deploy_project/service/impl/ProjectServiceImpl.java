@@ -42,7 +42,9 @@ public class ProjectServiceImpl implements ProjectService {
         List<projectDTO> projects = projectMapper.getProjectList(userId);
         return projects;
     }
-    
-    
+
+    public void deleteProject(int projectid) {
+        projectMapper.deleteProject(projectid);
+    } 
 }
 

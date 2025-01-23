@@ -1,6 +1,10 @@
 package com.jioon.deploy_project.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jioon.deploy_project.service.ProjectService;
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class projectController {
@@ -31,5 +36,18 @@ public class projectController {
     
         return "redirect:/afterLog";
     }
+
+    @PostMapping("/deleteProject")
+    public ResponseEntity<Map<String, String>> postMethodName(@RequestParam int projectId) {
+        
+        projectService.deleteProject(projectId);
+
+         // JSON 형태로 리다이렉트 정보를 반환
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", "/afterLog");  // 리다이렉트 URL
+            
+        return ResponseEntity.ok(response);
+    }
+    
 }
 

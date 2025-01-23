@@ -27,5 +27,9 @@
         SELECT * FROM ezdeploy.projects WHERE userid = #{userId}
     </select>
 
+    <delete id="deleteProject" parameterType="int">
+        delete from ezdeploy.projects WHERE projectid = #{projectId}
+    </delete>
+
 
 </mapper>
