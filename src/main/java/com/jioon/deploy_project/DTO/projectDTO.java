@@ -11,19 +11,20 @@ public class projectDTO {
     private String projectId;
     private String projectName;
     private String projectDescription;
-    private String projectUploadDate;
+    @CreationTimestamp
+    @Column(name = "projectUploadDate")
+    private LocalDateTime projectUploadDate;
     private String projectTag;
     private int projectDownloadCount;
     private int projectViewCount;
-    private byte[] projectDockerfile;
-    private byte[] projectBuildfile;
+    private byte[] dockerfile;
+    private byte[] buildfile;
     private String projectVersion;
     private String userId;
     private String projectStatus;
+    private boolean status;
     @UpdateTimestamp
     @Column(name = "projectupdateddate")
     private LocalDateTime projectUpdatedDate;
-    @CreationTimestamp
-    @Column(name = "projectcreateddate")
-    private LocalDateTime projectCreatedDate;
+    
 }

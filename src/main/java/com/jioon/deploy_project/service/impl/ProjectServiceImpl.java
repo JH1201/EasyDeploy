@@ -31,8 +31,8 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectDescription(projectDescription);
         project.setProjectTag(projectTag);
         project.setProjectVersion(projectVersion);
-        project.setProjectDockerfile(dockerfileContent);
-        project.setProjectBuildfile(buildfileContent);
+        project.setBuildfile(dockerfileContent);
+        project.setBuildfile(buildfileContent);
         project.setUserId(userId);
 
         projectMapper.insertProject(project);
@@ -46,5 +46,17 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteProject(int projectid) {
         projectMapper.deleteProject(projectid);
     } 
+
+    public void updateProject(int projectId) {
+        projectMapper.updateProject(projectId);
+    }
+
+    public List<projectDTO> getAllProject() {
+        return projectMapper.getAllProject();
+    }
+
+    public projectDTO getProject(int projectId) {
+        return projectMapper.getProject(projectId);
+    }
 }
 

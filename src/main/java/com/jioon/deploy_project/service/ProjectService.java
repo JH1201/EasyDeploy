@@ -13,4 +13,10 @@ public interface ProjectService {
 
     public void deleteProject(int projectid);
 
+    public void updateProject(int projectId);
+
+    public List<projectDTO> getAllProject();
+
+    public projectDTO getProject(int projectId);
+
 }

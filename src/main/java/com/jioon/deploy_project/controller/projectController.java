@@ -6,12 +6,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jioon.deploy_project.service.ProjectService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -38,16 +41,30 @@ public class projectController {
     }
 
     @PostMapping("/deleteProject")
-    public ResponseEntity<Map<String, String>> postMethodName(@RequestParam int projectId) {
+    public ResponseEntity<Map<String, String>> deleteProjectMethod(@RequestParam int projectId) {
         
         projectService.deleteProject(projectId);
 
-         // JSON 형태로 리다이렉트 정보를 반환
+        // JSON 형태로 리다이렉트 정보를 반환
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/afterLog");  // 리다이렉트 URL
             
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/updateProject")
+    public ResponseEntity<Map<String, String>> updateProjectMethod(@RequestBody int projectId, Model model) {
+        
+        projectService.updateProject(projectId);
+
+        // JSON 형태로 리다이렉트 정보를 반환
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", "/afterLog");  // 리다이렉트 URL
+        model.addAttribute("oneProject", projectService.getProject(projectId));
+
+        return ResponseEntity.ok(response);
+    }
+    
     
 }
 

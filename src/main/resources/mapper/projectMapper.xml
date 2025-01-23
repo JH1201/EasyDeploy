@@ -19,8 +19,8 @@
             #{projectDescription}, 
             #{projectTag}, 
             #{projectVersion},
-            #{projectDockerfile}, 
-            #{projectBuildfile})
+            #{dockerfile}, 
+            #{buildfile})
     </insert>
 
     <select id="getProjectList" parameterType="String" resultType="com.jioon.deploy_project.DTO.projectDTO">
@@ -30,6 +30,26 @@
     <delete id="deleteProject" parameterType="int">
         delete from ezdeploy.projects WHERE projectid = #{projectId}
     </delete>
+
+    <update id="updateProject" parameterType="int">
+        update ezdeploy.projects
+        set 
+            projectname = #{projectName},
+            projectdescription = #{projectDescription}
+            projecttag = #{projectTag}
+            projectversion = #{projectVersion}
+            dockerfile = #{projectDockerfile}
+            buildfile = #{projectBuildfile}
+        where projectid = #{projectId}
+    </update>
+
+    <select id="getAllProject" resultType="List">
+        select count(*) from ezdeploy.projects
+    </select>
+
+    <select id="getProject" parameterType="int" resultType="com.jioon.deploy_project.DTO.projectDTO">
+        select * from ezdeploy.projects where projectid = #{projectId}
+    </select>
 
 
 </mapper>
