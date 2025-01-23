@@ -12,5 +12,7 @@ public interface ProjectMapper {
     public void insertProject(projectDTO project);
 
     public List<projectDTO> getProjectList(String userId);
+
+    public List<String> getProjecttags(String userid);
 }
 

@@ -8,7 +8,6 @@ import com.jioon.deploy_project.DTO.userDTO;
 import com.jioon.deploy_project.service.impl.ProjectServiceImpl;
 import com.jioon.deploy_project.service.impl.UserLoginServiceImpl;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +69,7 @@ public class LoginController {
         
         model.addAttribute("username", user.getUsername());
         model.addAttribute("projects", projectService.getProjectList(user.getUserid()));
-        
+
          
         return "login/afterLog";
     }
