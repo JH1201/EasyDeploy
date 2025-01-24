@@ -31,14 +31,14 @@
         delete from ezdeploy.projects WHERE projectid = #{projectId}
     </delete>
 
-    <update id="updateProject" parameterType="int">
+    <update id="updateProject" parameterType="map">
         update ezdeploy.projects
         set 
             projectname = #{projectName},
-            projectdescription = #{projectDescription}
-            projecttag = #{projectTag}
-            projectversion = #{projectVersion}
-            dockerfile = #{projectDockerfile}
+            projectdescription = #{projectDescription},
+            projecttag = #{projectTag},
+            projectversion = #{projectVersion},
+            dockerfile = #{projectDockerfile},
             buildfile = #{projectBuildfile}
         where projectid = #{projectId}
     </update>

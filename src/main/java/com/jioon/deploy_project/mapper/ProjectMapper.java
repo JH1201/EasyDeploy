@@ -1,6 +1,7 @@
 package com.jioon.deploy_project.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,7 +18,7 @@ public interface ProjectMapper {
 
     public void deleteProject(int projectId);
 
-    public void updateProject(int projectId);
+    public void updateProject(Map map);
 
     public List<projectDTO> getAllProject();
 

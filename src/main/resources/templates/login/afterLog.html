@@ -167,7 +167,7 @@
                             <div class="mb-2">
                                 <label for="dockerfile" class="form-label">Dockerfile</label>
                                 <input type="file" class="form-control" id="dockerfile" name="dockerfile" 
-                                       accept=".dockerfile,Dockerfile" required>
+                                       accept=".*" required>
                             </div>
                             <div class="mb-2">
                                 <label for="buildFile" class="form-label">빌드 파일 (jar/war)</label>
@@ -181,6 +181,59 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                     <button type="submit" form="uploadProject" class="btn btn-primary">업로드</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 프로젝트 update 모달 -->
+    <div class="modal fade" id="updateModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">프로젝트 업로드</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateProject" method="post" action="/updateProject" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="projectName" class="form-label">프로젝트 이름</label>
+                            <input type="text" class="form-control" id="projectName" name="projectName" value="helo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="projectDescription" class="form-label">프로젝트 설명</label>
+                            <textarea class="form-control" id="projectDescription" name="projectDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="projectTag" class="form-label">태그</label>
+                            <input type="text" class="form-control" id="projectTag" name="projectTag" 
+                                   placeholder="쉼표로 구분하여 입력 (예: Spring, Web, API)">
+                        </div>
+                        <div class="mb-3">
+                            <label for="projectVersion" class="form-label">버전</label>
+                            <input type="text" class="form-control" id="projectVersion" name="projectVersion" 
+                                   placeholder="예: 1.0.0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">프로젝트 파일</label>
+                            <div class="mb-2">
+                                <label for="dockerfile" class="form-label">Dockerfile</label>
+                                <input type="file" class="form-control" id="dockerfile" name="dockerfile" 
+                                       accept=".*" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="buildFile" class="form-label">빌드 파일 (jar/war)</label>
+                                <input type="file" class="form-control" id="buildFile" name="buildFile" 
+                                       accept=".jar,.war" required>
+                            </div>
+                        </div>
+                        <input type="hidden" id="userId" name="userId" th:value="${username}">
+                        <input type="hidden" id="projectId" name="projectId" th:value="${projectId}">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="submit" form="updateProject" class="btn btn-primary">업로드</button>
                 </div>
             </div>
         </div>
@@ -229,6 +282,28 @@
             });
         }
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // 수정 버튼 목록을 선택 (data-bs-target="#updateModal"를 가진 버튼)
+        const updateButtons = document.querySelectorAll("[data-bs-target='#updateModal']");
+
+        // 각 버튼에 클릭 이벤트 추가
+        updateButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                // 버튼의 data-project-id 속성 값 가져오기
+                const projectId = this.getAttribute("data-project-id");
+
+                // 모달 내의 hidden input 필드를 선택
+                const projectIdInput = document.querySelector("#updateModal #projectId");
+
+                // hidden input 필드의 값을 버튼의 projectId로 설정
+                projectIdInput.value = projectId;
+
+                // 필요한 경우 다른 필드도 설정 가능
+                console.log(`프로젝트 ID 설정됨: ${projectId}`);
+            });
+        });
+    });
 
     
     </script>

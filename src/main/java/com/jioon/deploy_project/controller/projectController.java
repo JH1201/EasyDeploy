@@ -13,9 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jioon.deploy_project.service.ProjectService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 
 @Controller
@@ -54,16 +51,31 @@ public class projectController {
     }
 
     @PostMapping("/updateProject")
-    public ResponseEntity<Map<String, String>> updateProjectMethod(@RequestBody int projectId, Model model) {
+    public String updateProjectMethod(@RequestParam("projectName") String projectName,
+                                                                   @RequestParam("projectDescription") String projectDescription,
+                                                                   @RequestParam("projectTag") String projectTag,
+                                                                   @RequestParam("projectVersion") String projectVersion,
+                                                                   @RequestParam("dockerfile") MultipartFile dockerfile,
+                                                                   @RequestParam("buildFile") MultipartFile buildFile,
+                                                                   @RequestParam("projectId") String projectId,
+                                                                   HttpSession session,
+                                                                   Model model) 
+    {
+                
+        // 세션에서 데이터 가져오기
+        String userId = (String) session.getAttribute("userid");
+        int projectID = Integer.parseInt(projectId);
+                
+        projectService.updateProject(projectID, userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile);
         
-        projectService.updateProject(projectId);
-
-        // JSON 형태로 리다이렉트 정보를 반환
+        /* // JSON 형태로 리다이렉트 정보를 반환
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/afterLog");  // 리다이렉트 URL
-        model.addAttribute("oneProject", projectService.getProject(projectId));
+        model.addAttribute("oneProject", projectService.getProject(projectID));
+         */
+        //ResponseEntity.ok(response);
 
-        return ResponseEntity.ok(response);
+        return "redirect:/afterLog";
     }
     
 }
