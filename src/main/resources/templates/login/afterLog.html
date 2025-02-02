@@ -123,7 +123,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">최근 업데이트: <span th:text="${#temporals.format(project.projectUpdatedDate, 'yyyy-MM-dd HH:mm')}">2024-03-21</span></small>
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-primary" th:data-project-id="${project.projectId}" data-bs-toggle="modal" data-bs-target="#updateModal">수정</button>
+                                    <button class="btn btn-sm btn-outline-primary" th:data-project-id="${project.projectId}" data-bs-toggle="modal" data-bs-target="#updateModal">보기</button>
                                     <button class="btn btn-sm btn-outline-danger" th:data-project-id="${project.projectId}" onclick="deleteProject(this.getAttribute('data-project-id'))">삭제</button>
                                 </div>
                             </div>
@@ -191,14 +191,14 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">프로젝트 업로드</h5>
+                    <h5 class="modal-title">프로젝트 확인&수정</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form id="updateProject" method="post" action="/updateProject" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="projectName" class="form-label">프로젝트 이름</label>
-                            <input type="text" class="form-control" id="projectName" name="projectName" value="helo" required>
+                            <input type="text" class="form-control" id="projectName" name="projectName"required>
                         </div>
                         <div class="mb-3">
                             <label for="projectDescription" class="form-label">프로젝트 설명</label>
@@ -227,13 +227,13 @@
                                        accept=".jar,.war" required>
                             </div>
                         </div>
-                        <input type="hidden" id="userId" name="userId" th:value="${username}">
-                        <input type="hidden" id="projectId" name="projectId" th:value="${projectId}">
+                        <input id="userId" name="userId" th:value="${username}">
+                        <input id="projectId" name="projectId" th:value="${projectId}">
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="submit" form="updateProject" class="btn btn-primary">업로드</button>
+                    <button type="submit" form="updateProject" class="btn btn-primary">수정</button>
                 </div>
             </div>
         </div>
@@ -250,22 +250,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        /*
-    function editProject(projectId) {
-        if (confirm('정말로 이 프로젝트를 수정하시겠습니까?')) {
-            
-            fetch(`/updateProject?projectId=${projectId}`, {
-                method: "POST",
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = data.redirectUrl;
-            })
-            .catch(error => {
-                console.error("에러:", error);
-            });
-        }
-    }*/
 
     function deleteProject(projectId) {
         if (confirm('정말로 이 프로젝트를 삭제하시겠습니까?')) {
@@ -298,6 +282,23 @@
 
                 // hidden input 필드의 값을 버튼의 projectId로 설정
                 projectIdInput.value = projectId;
+
+                 // 서버에서 해당 projectId에 대한 데이터 가져오기
+                fetch(`/getProjectDetails?projectId=${projectId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("projectId").value = data.projectId;
+                        console.log(data.projectId);
+                        document.getElementById("projectName").value = data.projectName;
+                        console.log(data.projectName);
+                        document.getElementById("projectDescription").value = data.projectDescription;
+                        console.log(data.projectDescription);
+                        document.getElementById("projectTag").value = data.projectTag;
+                        console.log(data.projectTag);
+                        document.getElementById("projectVersion").value = data.projectVersion;
+                        console.log(data.projectVersion);
+                    })
+                    .catch(error => console.error("Error fetching project details:", error));
 
                 // 필요한 경우 다른 필드도 설정 가능
                 console.log(`프로젝트 ID 설정됨: ${projectId}`);

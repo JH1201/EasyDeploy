@@ -18,5 +18,4 @@ public interface ProjectService {
     public List<projectDTO> getAllProject();
 
     public projectDTO getProject(int projectId);
-
 }
