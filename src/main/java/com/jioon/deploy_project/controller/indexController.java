@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import com.jioon.deploy_project.DTO.userDTO;
 
 @Controller
-public class IndexController {
+public class indexController {
     
     @GetMapping("/")
     public String index(Model model, HttpSession session) {

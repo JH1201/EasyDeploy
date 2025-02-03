@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class projectDTO {
-    private String projectId;
+    private int projectId;
     private String projectName;
     private String projectDescription;
     @CreationTimestamp

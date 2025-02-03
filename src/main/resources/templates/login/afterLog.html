@@ -198,20 +198,20 @@
                     <form id="updateProject" method="post" action="/updateProject" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="projectName" class="form-label">프로젝트 이름</label>
-                            <input type="text" class="form-control" id="projectName" name="projectName"required>
+                            <input type="text" class="form-control" id="projectNameUpdate" name="projectName" required>
                         </div>
                         <div class="mb-3">
                             <label for="projectDescription" class="form-label">프로젝트 설명</label>
-                            <textarea class="form-control" id="projectDescription" name="projectDescription" rows="3" required></textarea>
+                            <textarea class="form-control" id="projectDescriptionUpdate" name="projectDescription" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="projectTag" class="form-label">태그</label>
-                            <input type="text" class="form-control" id="projectTag" name="projectTag" 
+                            <input type="text" class="form-control" id="projectTagUpdate" name="projectTag" 
                                    placeholder="쉼표로 구분하여 입력 (예: Spring, Web, API)">
                         </div>
                         <div class="mb-3">
                             <label for="projectVersion" class="form-label">버전</label>
-                            <input type="text" class="form-control" id="projectVersion" name="projectVersion" 
+                            <input type="text" class="form-control" id="projectVersionUpdate" name="projectVersion" 
                                    placeholder="예: 1.0.0" required>
                         </div>
                         <div class="mb-3">
@@ -227,7 +227,7 @@
                                        accept=".jar,.war" required>
                             </div>
                         </div>
-                        <input id="userId" name="userId" th:value="${username}">
+                        <input type="hidden" id="userId" name="userId" th:value="${username}">
                         <input id="projectId" name="projectId" th:value="${projectId}">
                     </form>
                 </div>
@@ -289,13 +289,13 @@
                     .then(data => {
                         document.getElementById("projectId").value = data.projectId;
                         console.log(data.projectId);
-                        document.getElementById("projectName").value = data.projectName;
+                        document.getElementById("projectNameUpdate").value = data.projectName;
                         console.log(data.projectName);
-                        document.getElementById("projectDescription").value = data.projectDescription;
+                        document.getElementById("projectDescriptionUpdate").value = data.projectDescription;
                         console.log(data.projectDescription);
-                        document.getElementById("projectTag").value = data.projectTag;
+                        document.getElementById("projectTagUpdate").value = data.projectTag;
                         console.log(data.projectTag);
-                        document.getElementById("projectVersion").value = data.projectVersion;
+                        document.getElementById("projectVersionUpdate").value = data.projectVersion;
                         console.log(data.projectVersion);
                     })
                     .catch(error => console.error("Error fetching project details:", error));
