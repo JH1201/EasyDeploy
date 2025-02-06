@@ -218,17 +218,17 @@
                             <label class="form-label">프로젝트 파일</label>
                             <div class="mb-2">
                                 <label for="dockerfile" class="form-label">Dockerfile</label>
-                                <input type="file" class="form-control" id="dockerfile" name="dockerfile" 
+                                <input type="file" class="form-control" id="dockerfileUpdate" name="dockerfile" 
                                        accept=".*" required>
                             </div>
                             <div class="mb-2">
                                 <label for="buildFile" class="form-label">빌드 파일 (jar/war)</label>
-                                <input type="file" class="form-control" id="buildFile" name="buildFile" 
+                                <input type="file" class="form-control" id="buildFileUpdate" name="buildFile" 
                                        accept=".jar,.war" required>
                             </div>
                         </div>
                         <input type="hidden" id="userId" name="userId" th:value="${username}">
-                        <input id="projectId" name="projectId" th:value="${projectId}">
+                        <input type="hidden" id="projectId" name="projectId" th:value="${projectId}">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -297,6 +297,10 @@
                         console.log(data.projectTag);
                         document.getElementById("projectVersionUpdate").value = data.projectVersion;
                         console.log(data.projectVersion);
+                        const dockerfile = document.getElementById("dockerfileUpdate").files
+                        console.log(dockerfile);
+                        const buildfile = document.getElementById("buildFileUpdate").files
+                        console.log(buildfile);
                     })
                     .catch(error => console.error("Error fetching project details:", error));
 
