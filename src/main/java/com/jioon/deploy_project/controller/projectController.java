@@ -34,8 +34,13 @@ public class projectController {
 
         // 세션에서 데이터 가져오기
         String userId = (String) session.getAttribute("userid");
-        
-        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile);
+
+        String dockerfileName = dockerfile.getOriginalFilename();
+        System.out.println(dockerfileName);
+        String buildfileName = buildFile.getOriginalFilename();
+        System.out.println(buildfileName);
+
+        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile, dockerfileName, buildfileName);
     
         return "redirect:/afterLog";
     }
@@ -83,6 +88,12 @@ public class projectController {
     @GetMapping("/getProjectDetails")
     public ResponseEntity<projectDTO> getProjectDetails(@RequestParam int projectId) {
         projectDTO project = projectService.getProject(projectId);
+
+        System.out.println(projectId);
+        System.out.println("project ID : " + project.getProjectId());
+        System.out.println("user ID : " + project.getUserId());
+        System.out.println("dockerfile Name : " + project.getDfileName());
+        System.out.println("buildfile Name : " + project.getDfileName());
         return ResponseEntity.ok(project);
     }
 

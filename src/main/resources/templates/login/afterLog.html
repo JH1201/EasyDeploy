@@ -297,10 +297,7 @@
                         console.log(data.projectTag);
                         document.getElementById("projectVersionUpdate").value = data.projectVersion;
                         console.log(data.projectVersion);
-                        const dockerfile = document.getElementById("dockerfileUpdate").files
-                        console.log(dockerfile);
-                        const buildfile = document.getElementById("buildFileUpdate").files
-                        console.log(buildfile);
+                        
                     })
                     .catch(error => console.error("Error fetching project details:", error));
 

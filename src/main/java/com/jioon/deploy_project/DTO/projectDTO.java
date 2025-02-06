@@ -18,9 +18,9 @@ public class projectDTO {
     private int projectDownloadCount;
     private int projectViewCount;
     private byte[] dockerfile;
-    private String dockerfileName;
+    private String dfileName;
     private byte[] buildfile;
-    private String buildfildName;
+    private String bfileName;
     private String projectVersion;
     private String userId;
     private String projectStatus;

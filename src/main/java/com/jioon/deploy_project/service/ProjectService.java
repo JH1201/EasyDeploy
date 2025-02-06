@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jioon.deploy_project.DTO.projectDTO;
 
 public interface ProjectService {
-    public void uploadProject(String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile);
+    public void uploadProject(String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile, String dockerfileName ,String buildfileName);
     
     public List<projectDTO> getProjectList(String userId);
 

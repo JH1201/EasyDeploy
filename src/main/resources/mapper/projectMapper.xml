@@ -11,7 +11,9 @@
             projecttag, 
             projectversion,
             dockerfile, 
-            buildfile
+            buildfile,
+            dockerfilename,
+            buildfilename
             ) 
         VALUES (
             #{userId}, 
@@ -20,7 +22,9 @@
             #{projectTag}, 
             #{projectVersion},
             #{dockerfile}, 
-            #{buildfile})
+            #{buildfile},
+            #{dfileName},
+            #{bfileName})
     </insert>
 
     <select id="getProjectList" parameterType="String" resultType="com.jioon.deploy_project.DTO.projectDTO">
