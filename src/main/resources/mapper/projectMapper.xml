@@ -23,8 +23,8 @@
             #{projectVersion},
             #{dockerfile}, 
             #{buildfile},
-            #{dfileName},
-            #{bfileName})
+            #{dockerName},
+            #{buildName})
     </insert>
 
     <select id="getProjectList" parameterType="String" resultType="com.jioon.deploy_project.DTO.projectDTO">

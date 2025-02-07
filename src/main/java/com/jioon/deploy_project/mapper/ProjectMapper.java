@@ -23,5 +23,6 @@ public interface ProjectMapper {
     public List<projectDTO> getAllProject();
 
     public projectDTO getProject(int projectId);
+
 }
 

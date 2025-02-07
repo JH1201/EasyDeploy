@@ -18,7 +18,9 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectMapper projectMapper;
 
     @Override
-    public void uploadProject(String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile, String dockerfileName ,String buildfileName) {
+    public void uploadProject(String userId, String projectName, String projectDescription, String projectTag, String projectVersion, byte[] dockerfile, byte[] buildfile, String dockerfileName ,String buildfileName) {
+        
+        /* 
         byte[] dockerfileContent = null;
         byte[] buildfileContent = null;
         
@@ -28,17 +30,18 @@ public class ProjectServiceImpl implements ProjectService {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        */
         
         projectDTO project = new projectDTO();
         project.setProjectName(projectName);
         project.setProjectDescription(projectDescription);
         project.setProjectTag(projectTag);
         project.setProjectVersion(projectVersion);
-        project.setBuildfile(dockerfileContent);
-        project.setBuildfile(buildfileContent);
+        project.setBuildfile(dockerfile);
+        project.setBuildfile(buildfile);
         project.setUserId(userId);
-        project.setDfileName(dockerfileName);
-        project.setBfileName(buildfileName);
+        project.setDockerName(dockerfileName);
+        project.setBuildName(buildfileName);
 
         projectMapper.insertProject(project);
     }
@@ -102,6 +105,5 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.getProject(projectId);
     }
 
-    
 }
 

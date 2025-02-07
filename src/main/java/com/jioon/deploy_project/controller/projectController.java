@@ -1,5 +1,6 @@
 package com.jioon.deploy_project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,17 @@ public class projectController {
         String buildfileName = buildFile.getOriginalFilename();
         System.out.println(buildfileName);
 
-        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile, dockerfileName, buildfileName);
+        byte[] dockerfileContent = null;
+        byte[] buildfileContent = null;
+        
+        try {
+            dockerfileContent = dockerfile.getBytes();
+            buildfileContent = buildFile.getBytes();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfileContent, buildfileContent, dockerfileName, buildfileName);
     
         return "redirect:/afterLog";
     }
@@ -89,11 +100,14 @@ public class projectController {
     public ResponseEntity<projectDTO> getProjectDetails(@RequestParam int projectId) {
         projectDTO project = projectService.getProject(projectId);
 
+
         System.out.println(projectId);
         System.out.println("project ID : " + project.getProjectId());
         System.out.println("user ID : " + project.getUserId());
-        System.out.println("dockerfile Name : " + project.getDfileName());
-        System.out.println("buildfile Name : " + project.getDfileName());
+        
+        System.out.println("dockerfile Name : " + project.getDockerName());
+        System.out.println("buildfile Name : " + project.getBuildName());
+        
         return ResponseEntity.ok(project);
     }
 
