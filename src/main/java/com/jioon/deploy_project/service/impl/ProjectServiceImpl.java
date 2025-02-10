@@ -34,7 +34,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectDescription(projectDescription);
         project.setProjectTag(projectTag);
         project.setProjectVersion(projectVersion);
-        project.setBuildfile(dockerfileContent);
+        project.setDockerfile(dockerfileContent);
         project.setBuildfile(buildfileContent);
         project.setUserId(userId);
         project.setDfileName(dockerfileName);
@@ -55,12 +55,13 @@ public class ProjectServiceImpl implements ProjectService {
     } 
 
     @Override
-    public void updateProject(int projectId, String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile) {
+    public void updateProject(int projectId, String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile, String dockerName, String buildName) {
 
-        //projectDTO project = new projectDTO();
+        projectDTO project = new projectDTO();
+        project = getProject(projectId);
 
-        byte[] dockerfileContent = null;
-        byte[] buildfileContent = null;
+        byte[] dockerfileContent = project.getDockerfile();
+        byte[] buildfileContent = project.getBuildfile();
         
         try {
             dockerfileContent = dockerfile.getBytes();
@@ -87,7 +88,8 @@ public class ProjectServiceImpl implements ProjectService {
         params.put("projectDockerfile", dockerfileContent);
         params.put("projectBuildfile", buildfileContent);
         params.put("projectId", projectId);
-        
+        params.put("dfileName", dockerName);
+        params.put("bfileName", buildName);
         
         projectMapper.updateProject(params);
     }

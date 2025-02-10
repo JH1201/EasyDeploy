@@ -12,8 +12,8 @@
             projectversion,
             dockerfile, 
             buildfile,
-            dockerfilename,
-            buildfilename
+            dfileName,
+            bfileName
             ) 
         VALUES (
             #{userId}, 
@@ -43,7 +43,9 @@
             projecttag = #{projectTag},
             projectversion = #{projectVersion},
             dockerfile = #{projectDockerfile},
-            buildfile = #{projectBuildfile}
+            buildfile = #{projectBuildfile},
+            dfilename = #{dfileName},
+            bfilename = #{bfileName}
         where projectid = #{projectId}
     </update>
 

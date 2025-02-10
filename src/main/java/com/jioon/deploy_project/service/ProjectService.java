@@ -13,7 +13,7 @@ public interface ProjectService {
 
     public void deleteProject(int projectid);
 
-    public void updateProject(int projectId, String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile);
+    public void updateProject(int projectId, String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile, String dockerName, String buildName);
 
     public List<projectDTO> getAllProject();
 

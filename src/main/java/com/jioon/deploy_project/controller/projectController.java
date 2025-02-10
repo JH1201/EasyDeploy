@@ -31,6 +31,9 @@ public class projectController {
                                 @RequestParam("dockerfile") MultipartFile dockerfile,
                                 @RequestParam("buildFile") MultipartFile buildFile,
                                 HttpSession session) {
+        
+        System.out.println("[upload PostMapping]");
+
 
         // 세션에서 데이터 가져오기
         String userId = (String) session.getAttribute("userid");
@@ -48,6 +51,8 @@ public class projectController {
     @PostMapping("/deleteProject")
     public ResponseEntity<Map<String, String>> deleteProjectMethod(@RequestParam int projectId) {
         
+        System.out.println("[delete PostMapping]");
+
         projectService.deleteProject(projectId);
 
         // JSON 형태로 리다이렉트 정보를 반환
@@ -68,12 +73,18 @@ public class projectController {
                                                                    HttpSession session,
                                                                    Model model) 
     {
-                
+        
+        System.out.println("[update PostMapping]");
         // 세션에서 데이터 가져오기
         String userId = (String) session.getAttribute("userid");
         int projectID = Integer.parseInt(projectId);
+
+        String dockerfileName = dockerfile.getOriginalFilename();
+        System.out.println(dockerfileName);
+        String buildfileName = buildFile.getOriginalFilename();
+        System.out.println(buildfileName);
                 
-        projectService.updateProject(projectID, userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile);
+        projectService.updateProject(projectID, userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile, dockerfileName, buildfileName);
         
         /* // JSON 형태로 리다이렉트 정보를 반환
         Map<String, String> response = new HashMap<>();
@@ -90,10 +101,11 @@ public class projectController {
         projectDTO project = projectService.getProject(projectId);
 
         System.out.println(projectId);
+        System.out.println("[getProjectDetails GetMapping]");
         System.out.println("project ID : " + project.getProjectId());
         System.out.println("user ID : " + project.getUserId());
         System.out.println("dockerfile Name : " + project.getDfileName());
-        System.out.println("buildfile Name : " + project.getDfileName());
+        System.out.println("buildfile Name : " + project.getBfileName());
         return ResponseEntity.ok(project);
     }
 
