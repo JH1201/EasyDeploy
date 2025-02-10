@@ -38,12 +38,22 @@ public class projectController {
         // 세션에서 데이터 가져오기
         String userId = (String) session.getAttribute("userid");
 
+        byte[] dockerfileContent = null;
+        byte[] buildfileContent = null;
+        
+        try {
+            dockerfileContent = dockerfile.getBytes();
+            buildfileContent = buildFile.getBytes();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
         String dockerfileName = dockerfile.getOriginalFilename();
         System.out.println(dockerfileName);
         String buildfileName = buildFile.getOriginalFilename();
         System.out.println(buildfileName);
 
-        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile, dockerfileName, buildfileName);
+        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfileContent, buildfileContent, dockerfileName, buildfileName);
     
         return "redirect:/afterLog";
     }

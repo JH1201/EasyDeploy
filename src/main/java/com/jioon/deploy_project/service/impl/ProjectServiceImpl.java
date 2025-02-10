@@ -20,18 +20,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void uploadProject(String userId, String projectName, String projectDescription, String projectTag, String projectVersion, byte[] dockerfile, byte[] buildfile, String dockerfileName ,String buildfileName) {
         
-        /* 
-        byte[] dockerfileContent = null;
-        byte[] buildfileContent = null;
-        
-        try {
-            dockerfileContent = dockerfile.getBytes();
-            buildfileContent = buildFile.getBytes();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        */
-        
         projectDTO project = new projectDTO();
         project.setProjectName(projectName);
         project.setProjectDescription(projectDescription);
@@ -40,8 +28,8 @@ public class ProjectServiceImpl implements ProjectService {
         project.setBuildfile(dockerfile);
         project.setBuildfile(buildfile);
         project.setUserId(userId);
-        project.setDockerName(dockerfileName);
-        project.setBuildName(buildfileName);
+        project.setDfileName(dockerfileName);
+        project.setBfileName(buildfileName);
 
         projectMapper.insertProject(project);
     }
@@ -72,16 +60,6 @@ public class ProjectServiceImpl implements ProjectService {
         } catch(Exception e) {
             e.printStackTrace();
         }
-
-        /*
-        project.setProjectName(projectName);
-        project.setProjectDescription(projectDescription);
-        project.setProjectTag(projectTag);
-        project.setProjectVersion(projectVersion);
-        project.setBuildfile(dockerfileContent);
-        project.setBuildfile(buildfileContent);
-        project.setUserId(userId); 
-         */
 
         Map<String, Object> params = new HashMap<>();
         params.put("projectName", projectName);
