@@ -60,29 +60,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void updateProject(int projectId, String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile, String dockerName, String buildName) {
 
-        projectDTO project = new projectDTO();
-        project = getProject(projectId);
-
-        /* 
-        byte[] dockerfileContent = project.getDockerfile();
-        byte[] buildfileContent = project.getBuildfile();
-        
-
-        try {
-            dockerfileContent = dockerfile.getBytes();
-            buildfileContent = buildFile.getBytes();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-            */
-
         Map<String, Object> params = new HashMap<>();
         params.put("projectName", projectName);
         params.put("projectDescription", projectDescription);
         params.put("projectTag", projectTag);
         params.put("projectVersion", projectVersion);
-        //params.put("projectDockerfile", dockerfileContent);
-        //params.put("projectBuildfile", buildfileContent);
         params.put("projectId", projectId);
         params.put("dfileName", dockerName);
         params.put("bfileName", buildName);
