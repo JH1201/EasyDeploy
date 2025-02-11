@@ -19,7 +19,7 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectMapper projectMapper;
 
     @Override
-    public void uploadProject(String userId, String projectName, String projectDescription, String projectTag, String projectVersion) {
+    public void uploadProject(String userId, String projectName, String projectDescription, String projectTag, String projectVersion, String dockerfileName, String buildfileName) {
         
         projectDTO project = new projectDTO();
         project.setProjectName(projectName);
@@ -27,6 +27,8 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectTag(projectTag);
         project.setProjectVersion(projectVersion);
         project.setUserId(userId);
+        project.setDfileName(dockerfileName);
+        project.setBfileName(buildfileName);
 
         projectMapper.insertProject(project);
     }

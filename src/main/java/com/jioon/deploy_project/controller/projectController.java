@@ -53,7 +53,7 @@ public class projectController {
         String buildfileName = buildFile.getOriginalFilename();
         System.out.println(buildfileName);
 
-        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion);
+        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfileName, buildfileName);
         projectService.uploadProjectFile(userId, dockerfileContent, dockerfileName, buildfileContent, buildfileName);
 
         return "redirect:/afterLog";

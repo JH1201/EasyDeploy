@@ -9,14 +9,18 @@
             projectname, 
             projectdescription, 
             projecttag, 
-            projectversion
+            projectversion,
+            dfilename,
+            bfilename
             ) 
         VALUES (
             #{userId}, 
             #{projectName}, 
             #{projectDescription}, 
             #{projectTag}, 
-            #{projectVersion}
+            #{projectVersion},
+            #{dfileName},
+            #{bfileName}
             )
     </insert>
 
