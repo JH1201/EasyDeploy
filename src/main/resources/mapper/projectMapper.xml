@@ -9,22 +9,31 @@
             projectname, 
             projectdescription, 
             projecttag, 
-            projectversion,
-            dockerfile, 
-            buildfile,
-            dfileName,
-            bfileName
+            projectversion
             ) 
         VALUES (
             #{userId}, 
             #{projectName}, 
             #{projectDescription}, 
             #{projectTag}, 
-            #{projectVersion},
-            #{dockerfile}, 
-            #{buildfile},
-            #{dfileName},
-            #{bfileName})
+            #{projectVersion}
+            )
+    </insert>
+
+    <insert id="insertProjectFile" parameterType="com.jioon.deploy_project.DTO.fileDTO">
+            INSERT INTO ezdeploy.file_info (
+                userid,
+                dockerfile, 
+                dfilename,
+                buildfile,
+                bfilename
+                ) 
+            VALUES (
+                #{userId},
+                #{dockerFile}, 
+                #{dfileName},
+                #{buildFile},
+                #{bfileName})
     </insert>
 
     <select id="getProjectList" parameterType="String" resultType="com.jioon.deploy_project.DTO.projectDTO">

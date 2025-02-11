@@ -17,10 +17,12 @@ public class projectDTO {
     private String projectTag;
     private int projectDownloadCount;
     private int projectViewCount;
+    /* 
     private byte[] dockerfile;
     private String dfileName;
     private byte[] buildfile;
     private String bfileName;
+    */
     private String projectVersion;
     private String userId;
     private String projectStatus;

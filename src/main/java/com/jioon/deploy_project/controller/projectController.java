@@ -53,8 +53,9 @@ public class projectController {
         String buildfileName = buildFile.getOriginalFilename();
         System.out.println(buildfileName);
 
-        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfileContent, buildfileContent, dockerfileName, buildfileName);
-    
+        projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion);
+        projectService.uploadProjectFile(userId, dockerfileContent, dockerfileName, buildfileContent, buildfileName);
+
         return "redirect:/afterLog";
     }
 
@@ -114,8 +115,6 @@ public class projectController {
         System.out.println("[getProjectDetails GetMapping]");
         System.out.println("project ID : " + project.getProjectId());
         System.out.println("user ID : " + project.getUserId());
-        System.out.println("dockerfile Name : " + project.getDfileName());
-        System.out.println("buildfile Name : " + project.getBfileName());
         return ResponseEntity.ok(project);
     }
 
