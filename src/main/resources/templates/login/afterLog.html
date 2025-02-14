@@ -10,7 +10,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <!-- Custom CSS -->
-    <link href="/css/style.css" rel="stylesheet">
+    <!-- <link href="/css/style.css" rel="stylesheet"> -->
 </head>
 <body>
     <!-- 네비게이션 바 -->
@@ -217,22 +217,18 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">프로젝트 파일</label>
-                            <!--<div class="mb-2">
-                                <label for="dockerfile" class="form-label">Dockerfile</label>
-                                <input type="file" class="form-control" id="dockerFileUpdate" name="dockerfile"
-                                       accept=".*" required>
+                            <div class="mb-2">
+                                <label for="dockerfile" class="form-label">빌드 파일 (jar/war)</label>
+                                <input type="text" id="dockerFileUpdate" class="form-control" readonly>
+                                <input type="file" id="dockerFileInput" class="form-control" name="dockerfile" accept=".*" required style="display: none;">
+                                <button type="button" onclick="document.getElementById('dockerFileInput').click();">파일 선택</button>
                             </div>
                             <div class="mb-2">
-                                <label for="buildFile" class="form-label">빌드 파일 (jar/war)</label>
-                                <input type="file" class="form-control" id="buildFileUpdate" name="buildFile" 
-                                       accept=".jar,.war" required>
-                            </div>-->
-                            <div class="filebox">
-                                <input class="upload-name" value="첨부파일" placeholder="첨부파일">
-                                <label for="file">파일찾기</label> 
-                                <input type="file" id="file">
+                                <label for="buildFile" class="form-label">BuildFile</label>
+                                <input type="text" id="buildFileUpdate" class="form-control" readonly>
+                                <input type="file" id="buildFileInput" class="form-control" name="buildFile" accept=".jar,.war" required style="display: none;">
+                                <button type="button" onclick="document.getElementById('buildFileInput').click();">파일 선택</button>
                             </div>
-
                         </div>
                         <input type="hidden" id="userId" name="userId" th:value="${username}">
                         <input type="hidden" id="projectId" name="projectId" th:value="${projectId}">
@@ -256,6 +252,26 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Dockerfile 관련 이벤트
+            var dockerFileInput = document.getElementById("dockerFileInput");
+            var dockerFileUpdate = document.getElementById("dockerFileUpdate");
+    
+            dockerFileInput.addEventListener("change", function () {
+                dockerFileUpdate.value = dockerFileInput.files.length > 0 ? dockerFileInput.files[0].name : "";
+            });
+    
+            // BuildFile 관련 이벤트
+            var buildFileInput = document.getElementById("buildFileInput");
+            var buildFileUpdate = document.getElementById("buildFileUpdate");
+    
+            buildFileInput.addEventListener("change", function () {
+                buildFileUpdate.value = buildFileInput.files.length > 0 ? buildFileInput.files[0].name : "";
+            });
+        });
+    </script>
     <script>
 
     function deleteProject(projectId) {
@@ -275,7 +291,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        // 수정 버튼 목록을 선택 (data-bs-target="#checkModal"를 가진 버튼)
+        // 보기기 버튼 목록을 선택 (data-bs-target="#checkModal"를 가진 버튼)
         const updateButtons = document.querySelectorAll("[data-bs-target='#checkModal']");
 
         // 각 버튼에 클릭 이벤트 추가

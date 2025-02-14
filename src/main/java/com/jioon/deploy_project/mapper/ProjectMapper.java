@@ -21,7 +21,11 @@ public interface ProjectMapper {
 
     public void deleteProject(int projectId);
 
+    public void deleteProjectFile(String userId, String projectName);
+
     public void updateProject(@SuppressWarnings("rawtypes") Map map);
+    
+    public void updateProjectFile(@SuppressWarnings("rawtypes") Map map);
 
     public List<projectDTO> getAllProject();
 

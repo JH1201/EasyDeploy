@@ -54,18 +54,26 @@ public class projectController {
         System.out.println(buildfileName);
 
         projectService.uploadProject(userId, projectName, projectDescription, projectTag, projectVersion, dockerfileName, buildfileName);
-        projectService.uploadProjectFile(userId, dockerfileContent, dockerfileName, buildfileContent, buildfileName);
+
+        projectService.uploadProjectFile(userId, projectName, dockerfileContent, dockerfileName, buildfileContent, buildfileName);
 
         return "redirect:/afterLog";
     }
 
     @PostMapping("/deleteProject")
-    public ResponseEntity<Map<String, String>> deleteProjectMethod(@RequestParam int projectId) {
+    public ResponseEntity<Map<String, String>> deleteProjectMethod(@RequestParam int projectId, HttpSession session) {
         
         System.out.println("[delete PostMapping]");
 
-        projectService.deleteProject(projectId);
 
+        
+
+        projectDTO pro = projectService.getProject(projectId);
+        String userId = (String) session.getAttribute("userid");
+
+        projectService.deleteProjectFile(userId, pro.getProjectName());
+        projectService.deleteProject(projectId);
+        
         // JSON 형태로 리다이렉트 정보를 반환
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/afterLog");  // 리다이렉트 URL
@@ -97,6 +105,18 @@ public class projectController {
                 
         projectService.updateProject(projectID, userId, projectName, projectDescription, projectTag, projectVersion, dockerfile, buildFile, dockerfileName, buildfileName);
         
+        byte[] dockerfileContent = null;
+        byte[] buildfileContent = null;
+        
+        try {
+            dockerfileContent = dockerfile.getBytes();
+            buildfileContent = buildFile.getBytes();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        projectService.updateProjectFile(userId, projectName, dockerfileContent, dockerfileName, buildfileContent, buildfileName);
+
         /* // JSON 형태로 리다이렉트 정보를 반환
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/afterLog");  // 리다이렉트 URL

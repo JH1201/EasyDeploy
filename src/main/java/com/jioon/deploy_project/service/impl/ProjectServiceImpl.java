@@ -31,12 +31,14 @@ public class ProjectServiceImpl implements ProjectService {
         project.setBfileName(buildfileName);
 
         projectMapper.insertProject(project);
+        
     }
 
     @Override
-    public void uploadProjectFile(String userId, byte[] dockerfile, String dockerfileName, byte[] buildfile, String buildfileName) {
+    public void uploadProjectFile(String userId, String projectName, byte[] dockerfile, String dockerfileName, byte[] buildfile, String buildfileName) {
         fileDTO fileDTO = new fileDTO();
         fileDTO.setUserId(userId);
+        fileDTO.setProjectName(projectName);
         fileDTO.setDockerFile(dockerfile);
         fileDTO.setDfileName(dockerfileName);
         fileDTO.setBuildFile(buildfile);
@@ -58,6 +60,11 @@ public class ProjectServiceImpl implements ProjectService {
     } 
 
     @Override
+    public void deleteProjectFile(String userId, String projectName) {
+        projectMapper.deleteProjectFile(userId, projectName);
+    } 
+
+    @Override
     public void updateProject(int projectId, String userId, String projectName, String projectDescription, String projectTag, String projectVersion, MultipartFile dockerfile, MultipartFile buildFile, String dockerName, String buildName) {
 
         Map<String, Object> params = new HashMap<>();
@@ -70,6 +77,20 @@ public class ProjectServiceImpl implements ProjectService {
         params.put("bfileName", buildName);
         
         projectMapper.updateProject(params);
+    }
+
+    @Override
+    public void updateProjectFile(String userId, String projectName, byte[] dockerfile, String dockerfileName, byte[] buildfile, String buildfileName) {
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("projectName", projectName);
+        params.put("dockerFile", dockerfile);
+        params.put("dfileName", dockerfileName);
+        params.put("buildFile", buildfile);
+        params.put("bfileName", buildfileName);
+
+        projectMapper.updateProjectFile(params);
     }
 
     @Override

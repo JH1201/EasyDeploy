@@ -27,6 +27,7 @@
     <insert id="insertProjectFile" parameterType="com.jioon.deploy_project.DTO.fileDTO">
             INSERT INTO ezdeploy.file_info (
                 userid,
+                projectname,
                 dockerfile, 
                 dfilename,
                 buildfile,
@@ -34,6 +35,7 @@
                 ) 
             VALUES (
                 #{userId},
+                #{projectName},
                 #{dockerFile}, 
                 #{dfileName},
                 #{buildFile},
@@ -48,6 +50,10 @@
         delete from ezdeploy.projects WHERE projectid = #{projectId}
     </delete>
 
+    <delete id="deleteProjectFile" parameterType="String">
+        delete from ezdeploy.file_info WHERE userid = #{userId} and projectname = #{projectName}
+    </delete>
+
     <update id="updateProject" parameterType="map">
         update ezdeploy.projects
         set 
@@ -55,12 +61,22 @@
             projectdescription = #{projectDescription},
             projecttag = #{projectTag},
             projectversion = #{projectVersion},
-            dockerfile = #{projectDockerfile},
-            buildfile = #{projectBuildfile},
             dfilename = #{dfileName},
             bfilename = #{bfileName}
         where projectid = #{projectId}
     </update>
+
+    <update id="updateProjectFile" parameterType="map">
+        update ezdeploy.file_info
+        set 
+            projectname = #{projectName},
+            dockerfile = #{dockerFile}, 
+            dfilename = #{dfileName},
+            buildfile = #{buildFile},
+            bfilename = #{bfileName}
+        where userid = #{userId}
+    </update>
+
 
     <select id="getAllProject" resultType="List">
         select count(*) from ezdeploy.projects
