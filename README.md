@@ -47,41 +47,33 @@
 | `passwored`           | VARCHAR        | 사용자 비밀번호         |
 | `useremail`           | VARCHAR        | 사용자 이메일           |
 
-### **테이블 예시**
-```sql
-CREATE TABLE Users (
-    username VARCHAR(50) NOT NULL,
-    userid VARCHAR(50) PRIMARY KEY,
-    passwored VARCHAR(255) NOT NULL,
-    useremail VARCHAR(255) NOT NULL,
-);
-```
 ---
 
 ### Projects 테이블 구조
   
 | **컬럼명**            | **데이터 타입** | **설명**               |
 |-----------------------|----------------|------------------------|
-|`project_name`         | VARCHAR        | 프로젝트 제목            |
-| `project_description` | TEXT           | 프로젝트 설명           |
-| `project_upload_date` | DATETIME       | 프로젝트 업로드 날짜    |
-| `project_tag`         | VARCHAR        | 프로젝트 태그           |
-| `project_download_count` | INT         | 프로젝트 다운로드 수     |
-| `project_view_count`     | INT         | 프로젝트 조회수          |
-| `project_dockerfile`     | FILE        | Dockerfile 업로드       |
-| `project_build_file`  | FILE           | jar, war 파일 업로드    |
+|`projectid`         | VARCHAR        | 프로젝트 제목            
+|`projectname`         | VARCHAR        | 프로젝트 제목            |
+| `projectdescription` | TEXT           | 프로젝트 설명           |
+| `projectuploaddate` | DATETIME       | 프로젝트 업로드 날짜    |
+| `projecttag`         | VARCHAR        | 프로젝트 태그           |
+| `projectdownloadcount` | INT         | 프로젝트 다운로드 수     |
+| `projectviewcount`     | INT         | 프로젝트 조회수          |
+| `projectversion`     | VARCHAR        | 프로젝트 버전      |
+| `userid`     | VARCHAR        | 유저 ID      |
+| `status`     | bool        | 프로젝트 상태     |
+| `projectupdatedate`     | timestamp        | 프로젝트 업데이트 날짜      |
+| `dfilename`     | VARCHAR        | Dockerfile 이름       |
+| `bfilename`  | VARCHAR           | jar, war 파일 이름    |
 
-### **테이블 예시**
-```sql
-CREATE TABLE projects (
-    project_id SERIAL PRIMARY KEY,
-    project_name VARCHAR(100) NOT NULL,
-    project_description TEXT,
-    project_upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    project_tag VARCHAR(255),
-    project_download_count INT DEFAULT 0,
-    project_view_count INT DEFAULT 0,
-    project_dockerfile BYTEA, -- 파일 내용 저장
-    project_buildfile BYTEA   -- 파일 내용 저장
-);
-```
+### file_info 테이블 구조
+
+| **컬럼명**            | **데이터 타입** | **설명**               |
+|-----------------------|----------------|------------------------|
+| `userid`              | VARCHAR        | 사용자 ID (고유값)      |
+| `dockerfile`     | bytea        | Dockerfile      |
+| `dfilename`     | VARCHAR        | Dockerfile 이름       |
+| `buildfile`     | bytea        | buildfile        |
+| `bfilename`  | VARCHAR           | jar, war 파일 이름    |
+| `projectname`  | VARCHAR           | 프로젝트 제목    |
