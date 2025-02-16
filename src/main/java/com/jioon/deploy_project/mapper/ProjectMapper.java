@@ -17,6 +17,8 @@ public interface ProjectMapper {
 
     public List<projectDTO> getProjectList(String userId);
 
+    public int getProjectCount(String userId);
+
     public List<String> getProjecttags(String userid);
 
     public void deleteProject(int projectId);

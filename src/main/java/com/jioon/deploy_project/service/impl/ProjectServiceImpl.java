@@ -55,6 +55,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public int getProjectCount(String userId){
+        return projectMapper.getProjectCount(userId);
+    }
+
+    @Override
     public void deleteProject(int projectid) {
         projectMapper.deleteProject(projectid);
     } 

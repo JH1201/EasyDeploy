@@ -46,6 +46,10 @@
         SELECT * FROM ezdeploy.projects WHERE userid = #{userId}
     </select>
 
+    <select id="getProjectCount" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM ezdeploy.projects WHERE userid = #{userId}
+    </select>
+
     <delete id="deleteProject" parameterType="int">
         delete from ezdeploy.projects WHERE projectid = #{projectId}
     </delete>

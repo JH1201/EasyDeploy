@@ -69,7 +69,7 @@ public class LoginController {
         
         model.addAttribute("username", user.getUsername());
         model.addAttribute("projects", projectService.getProjectList(user.getUserid()));
-        
+        model.addAttribute("count", projectService.getProjectCount(user.getUserid()));
 
          
         return "login/afterLog";

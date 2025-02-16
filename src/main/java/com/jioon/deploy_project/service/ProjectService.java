@@ -13,6 +13,8 @@ public interface ProjectService {
 
     public List<projectDTO> getProjectList(String userId);
 
+    public int getProjectCount(String userId);
+
     public void deleteProject(int projectid);
 
     public void deleteProjectFile(String userId, String projectName);
