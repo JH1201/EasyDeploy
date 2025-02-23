@@ -67,6 +67,8 @@
 | `dfilename`     | VARCHAR        | Dockerfile 이름       |
 | `bfilename`  | VARCHAR           | jar, war 파일 이름    |
 
+---
+
 ### file_info 테이블 구조
 
 | **컬럼명**            | **데이터 타입** | **설명**               |
